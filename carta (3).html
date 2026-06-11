@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta · La Rotonda · Sa Vileta, Palma</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --azul:#1A1A1A;--azul2:#3A3A3A;
+  --sol:#E8B23C;--sol2:#F0C868;
+  --terra:#C8102E;--terra2:#E8334A;
+  --cream:#FFF8EC;--cream2:#FBEFDA;
+  --ink:#1B2430;--muted:#7A8290;
+  --border:rgba(0,0,0,0.12);
+}
+html,body{overflow-x:hidden;width:100%;scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream) url('https://i.imgur.com/icrdxNT.png') center/500px;background-blend-mode:multiply;color:var(--ink)}
+body::before{content:'';position:fixed;inset:0;background:var(--cream);opacity:0.85;z-index:-1;pointer-events:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:78px;background:rgba(255,248,236,0.95);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem}
+.nav-logo{font-family:'Fraunces',serif;font-weight:700;font-size:1.6rem;color:var(--azul);text-decoration:none;letter-spacing:0.5px;display:flex;align-items:center;gap:10px}
+.nav-logo .ring{width:30px;height:30px;border-radius:50%;border:3px solid var(--sol);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.nav-logo .ring::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--terra)}
+.nav-back{font-size:0.78rem;font-weight:700;letter-spacing:1px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;padding:0.6rem 1.3rem;border-radius:30px;border:1px solid var(--border);transition:all .2s;background:var(--cream)}
+.nav-back:hover{background:var(--azul);color:#fff;border-color:var(--azul)}
+.ham{display:none;background:none;border:1.5px solid var(--azul);color:var(--azul);width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:1rem;align-items:center;justify-content:center;flex-shrink:0}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:78px;left:0;right:0;background:var(--cream);padding:1rem 1.5rem 1.5rem;z-index:199;box-shadow:0 12px 30px rgba(0,0,0,0.1);max-height:75vh;overflow-y:auto}
+.mob-menu.open{display:flex}
+.mob-menu a{font-size:0.85rem;font-weight:600;color:var(--ink);text-decoration:none;padding:0.8rem 0.5rem;border-bottom:1px solid var(--border)}
+@media(max-width:920px){.nav{padding:0 1.2rem}.ham{display:flex!important}}
+
+/* PAGE HEADER */
+.ph{padding:9rem 0 4rem;position:relative;overflow:hidden;background:var(--azul)}
+.ph-bg{position:absolute;inset:0;background:url('https://i.imgur.com/icrdxNT.png') center/cover;opacity:0.18;mix-blend-mode:overlay}
+.ph::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;border:1px dashed rgba(255,255,255,0.1);right:-300px;top:-250px}
+.ph-content{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 2.5rem}
+.ph-label{font-size:0.7rem;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--sol);margin-bottom:0.8rem;display:flex;align-items:center;gap:10px}
+.ph-label::before{content:'';display:block;width:24px;height:3px;background:var(--sol);border-radius:2px}
+.ph-title{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(3rem,8vw,6rem);color:#fff;line-height:1.05}
+.ph-title em{font-style:italic;color:var(--sol)}
+.ph-sub{font-size:0.95rem;color:rgba(255,255,255,0.7);margin-top:0.8rem;font-weight:300}
+
+/* STRIP */
+.strip{background:var(--terra);padding:0.85rem 0;overflow:hidden}
+.strip-tk{display:flex;width:max-content;animation:tk 24s linear infinite}
+.strip-i{font-size:0.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;white-space:nowrap;padding:0 2.2rem;display:flex;align-items:center;gap:1.4rem}
+.strip-i i{color:var(--sol)}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* WRAP */
+.wrap{max-width:1280px;margin:0 auto;padding:0 2.5rem}
+@media(max-width:600px){.wrap{padding:0 1rem}}
+
+/* LAYOUT */
+.carta-layout{display:grid;grid-template-columns:250px 1fr;gap:0;min-height:calc(100vh - 78px)}
+.sidebar{background:var(--cream2);border-right:1px solid var(--border);padding:2.5rem 0;position:sticky;top:78px;height:calc(100vh - 78px);overflow-y:auto}
+.sidebar-title{font-size:0.62rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--terra);padding:0 1.8rem;margin-bottom:1.5rem}
+.sidebar-nav a{display:flex;align-items:center;gap:12px;padding:0.7rem 1.8rem;font-size:0.76rem;font-weight:600;color:var(--ink);text-decoration:none;border-left:3px solid transparent;transition:all .2s}
+.sidebar-nav a:hover,.sidebar-nav a.active{color:var(--azul);border-left-color:var(--azul);background:rgba(0,0,0,0.05)}
+.sidebar-nav a i{width:18px;font-size:0.85rem;color:var(--terra);flex-shrink:0;text-align:center}
+@media(max-width:920px){.carta-layout{grid-template-columns:1fr}.sidebar{display:none}}
+
+.carta-content{padding:4rem 3rem}
+@media(max-width:600px){.carta-content{padding:2.5rem 1rem}}
+
+.cat-section{margin-bottom:4.5rem}
+.cat-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:2rem;padding-bottom:1.1rem;border-bottom:2px solid var(--cream2)}
+.cat-icon{width:54px;height:54px;border-radius:50%;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--terra);flex-shrink:0}
+.cat-title{font-family:'Fraunces',serif;font-weight:700;font-size:2.1rem;color:var(--azul);letter-spacing:0.5px}
+.cat-desc{font-size:0.8rem;color:var(--muted);margin-top:0.2rem}
+
+/* FEATURED DISH WITH PHOTO */
+.dish-featured{display:grid;grid-template-columns:140px 1fr auto;gap:1.4rem;align-items:center;padding:1.2rem;margin-bottom:1.2rem;background:#fff;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,0.06);border:1px solid var(--border)}
+.dish-featured img{width:140px;height:110px;object-fit:cover;border-radius:14px;flex-shrink:0;filter:contrast(1.12) saturate(1.25) brightness(1.04)}
+.df-badge{font-size:0.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--terra);margin-bottom:0.3rem}
+.df-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;color:var(--ink)}
+.df-desc{font-size:0.8rem;color:var(--muted);margin-top:0.25rem;line-height:1.5}
+.df-price{font-family:'Fraunces',serif;font-weight:700;font-style:italic;font-size:1.6rem;color:var(--azul);white-space:nowrap}
+@media(max-width:560px){.dish-featured{grid-template-columns:1fr;text-align:center}.dish-featured img{width:100%;height:160px;margin:0 auto}.df-price{margin-top:0.5rem}}
+
+/* GRID ITEMS */
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:0 2rem}
+.mi{display:flex;justify-content:space-between;align-items:baseline;padding:0.85rem 0;border-bottom:1px dashed var(--border);gap:1rem;transition:all .2s}
+.mi:hover{background:var(--cream2);margin:0 -0.6rem;padding:0.85rem 0.6rem;border-radius:12px;border-bottom-color:transparent}
+.mi:last-child{border-bottom:none}
+.mi-left{flex:1;display:flex;align-items:baseline;gap:0.5rem}
+.mi-num{font-size:0.68rem;font-weight:800;color:var(--terra);flex-shrink:0}
+.mi-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;color:var(--ink)}
+.mi-desc{font-size:0.74rem;color:var(--muted);margin-top:0.1rem;line-height:1.5;display:block}
+.mi-price{font-family:'Fraunces',serif;font-weight:700;font-style:italic;font-size:1.05rem;color:var(--terra);white-space:nowrap;flex-shrink:0}
+.mi-price small{font-size:0.65rem;font-weight:500;font-style:normal;color:var(--muted)}
+
+/* MENUS DESTACADOS */
+.menus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:4.5rem}
+.menu-card{background:#fff;border-radius:22px;padding:2rem;box-shadow:0 10px 30px rgba(0,0,0,0.07);border:1px solid var(--border);position:relative;overflow:hidden}
+.menu-card.featured{background:var(--azul);color:#fff;border:none}
+.menu-card.featured .mc-title,.menu-card.featured .mc-sub-h{color:#fff}
+.menu-card.featured .mc-list{color:rgba(255,255,255,0.7)}
+.menu-card.featured .mc-list b{color:var(--sol)}
+.mc-price-badge{display:inline-flex;align-items:baseline;gap:4px;background:var(--sol);color:var(--ink);font-family:'Fraunces',serif;font-weight:700;padding:0.4rem 1rem;border-radius:30px;font-size:1.3rem;margin-bottom:1rem}
+.mc-price-badge small{font-size:0.6rem;font-weight:700}
+.mc-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.5rem;color:var(--azul);margin-bottom:0.3rem}
+.mc-sub{font-size:0.72rem;color:var(--muted);margin-bottom:1.2rem;font-weight:600;letter-spacing:0.5px;text-transform:uppercase}
+.menu-card.featured .mc-sub{color:rgba(255,255,255,0.55)}
+.mc-sub-h{font-size:0.66rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--terra);margin:1rem 0 0.5rem}
+.mc-list{font-size:0.8rem;color:var(--muted);line-height:1.9}
+.mc-note{font-size:0.68rem;color:var(--muted);margin-top:1.2rem;font-style:italic;border-top:1px solid var(--border);padding-top:0.8rem}
+.menu-card.featured .mc-note{color:rgba(255,255,255,0.4);border-top-color:rgba(255,255,255,0.1)}
+@media(max-width:1000px){.menus-grid{grid-template-columns:1fr}}
+
+.nota{font-family:'Fraunces',serif;font-style:italic;font-size:0.95rem;color:var(--muted);text-align:center;padding:2.5rem;border-top:1px solid var(--border);margin-top:3rem;letter-spacing:0.3px}
+
+.fab-top{position:fixed;bottom:5.5rem;right:2rem;z-index:300;width:50px;height:50px;background:var(--terra);color:#fff;display:none;align-items:center;justify-content:center;font-size:0.9rem;cursor:pointer;border:none;border-radius:50%;box-shadow:0 8px 24px rgba(200,16,46,0.4);transition:transform .2s}
+.fab-top.show{display:flex}
+.fab-top:hover{transform:scale(1.08)}
+
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:250;background:var(--azul);display:flex;box-shadow:0 -6px 20px rgba(0,0,0,0.15)}
+.sticky-cta a{flex:1;text-align:center;padding:0.95rem;font-size:0.78rem;font-weight:800;letter-spacing:1px;text-decoration:none;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px}
+.sticky-cta a:first-child{background:var(--terra)}
+.sticky-cta a:last-child{background:var(--sol);color:var(--ink)}
+@media(min-width:769px){.sticky-cta{display:none}}
+@media(max-width:768px){body{padding-bottom:56px}.fab-top{bottom:5.5rem}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><span class="ring"></span> La Rotonda</a>
+  <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
+  <button class="ham" onclick="toggleMob()"><i class="fas fa-bars"></i></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#menus" onclick="closeMob()">Menús</a>
+  <a href="#picar" onclick="closeMob()">Para picar</a>
+  <a href="#ensaladas" onclick="closeMob()">Ensaladas</a>
+  <a href="#arroces" onclick="closeMob()">Arroces y pastas</a>
+  <a href="#pescados" onclick="closeMob()">Pescados y mariscos</a>
+  <a href="#carnes" onclick="closeMob()">Carnes</a>
+  <a href="index.html" onclick="closeMob()">← Inicio</a>
+</div>
+
+<div class="ph">
+  <div class="ph-bg"></div>
+  <div class="ph-content">
+    <div class="ph-label">Cocina española de toda la vida</div>
+    <div class="ph-title">Nuestra <em>carta</em></div>
+    <p class="ph-sub">Camí de la Vileta 41, Palma · Terraza · Sin cierre a mediodía</p>
+  </div>
+</div>
+
+<div class="strip"><div class="strip-tk">
+  <div class="strip-i"><i class="fas fa-pepper-hot"></i> Para picar</div><div class="strip-i"><i class="fas fa-drumstick-bite"></i> Carnes a la brasa y a la piedra</div><div class="strip-i"><i class="fas fa-fish"></i> Pescados y mariscos</div><div class="strip-i"><i class="fas fa-bowl-rice"></i> Arroces y pastas</div><div class="strip-i"><i class="fas fa-leaf"></i> Ensaladas</div><div class="strip-i"><i class="fas fa-utensils"></i> Menú diario 11,95€</div>
+  <div class="strip-i"><i class="fas fa-pepper-hot"></i> Para picar</div><div class="strip-i"><i class="fas fa-drumstick-bite"></i> Carnes a la brasa y a la piedra</div><div class="strip-i"><i class="fas fa-fish"></i> Pescados y mariscos</div><div class="strip-i"><i class="fas fa-bowl-rice"></i> Arroces y pastas</div><div class="strip-i"><i class="fas fa-leaf"></i> Ensaladas</div><div class="strip-i"><i class="fas fa-utensils"></i> Menú diario 11,95€</div>
+</div></div>
+
+<div class="carta-layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">Categorías</div>
+    <nav class="sidebar-nav">
+      <a href="#menus"><i class="fas fa-star"></i> Menús</a>
+      <a href="#picar"><i class="fas fa-pepper-hot"></i> Para picar</a>
+      <a href="#ensaladas"><i class="fas fa-leaf"></i> Ensaladas y combinados</a>
+      <a href="#arroces"><i class="fas fa-bowl-rice"></i> Arroces y pastas</a>
+      <a href="#pescados"><i class="fas fa-fish"></i> Pescados y mariscos</a>
+      <a href="#carnes"><i class="fas fa-drumstick-bite"></i> Carnes a la brasa</a>
+      <a href="#piedra"><i class="fas fa-fire"></i> Carnes a la piedra</a>
+    </nav>
+  </aside>
+
+  <main class="carta-content">
+
+    <!-- MENUS -->
+    <div id="menus" class="cat-section">
+      <div class="cat-header"><div class="cat-icon"><i class="fas fa-star"></i></div><div><div class="cat-title">Nuestros Menús</div><div class="cat-desc">La forma más rica (y barata) de comer en La Rotonda</div></div></div>
+      <div class="menus-grid">
+
+        <div class="menu-card featured">
+          <div class="mc-price-badge">11,95<small>€</small></div>
+          <div class="mc-title">Menú Diario</div>
+          <div class="mc-sub">Lunes a viernes mediodía · incluye postre y bebida</div>
+          <div class="mc-sub-h">1º a elegir</div>
+          <div class="mc-list">Ensalada mixta · Ensalada de pollo · Croqueta de jamón · Canelones · Mejillones marinera · Boquerones fritos · Espaguetis boloñesa · Salmorejo</div>
+          <div class="mc-sub-h">2º a elegir</div>
+          <div class="mc-list">Pechuga de pollo a la brasa · Escalope de pollo · Gambas a la plancha · Costilleja parrilla · Escalope de ternera · Verdura mixta a la plancha · Parrillada de pescado y marisco · Entrecot a la parrilla · Brocheta mixta · Alitas de pollo fritas · Pollo al curry con arroz</div>
+        </div>
+
+        <div class="menu-card">
+          <div class="mc-price-badge" style="background:var(--terra);color:#fff">14,95<small>€</small></div>
+          <div class="mc-title">Menú Fin de Semana</div>
+          <div class="mc-sub">Viernes noche, fines de semana y festivos</div>
+          <div class="mc-sub-h">1º a elegir</div>
+          <div class="mc-list">Ensalada de pollo · Ensalada de aguacate y gamba con vinagreta · Croquetas de marisco · Fritura de pescado y marisco · Mejillones marinera · Arroz meloso · Canelones · Mejillones al vino · Espaguetis con gambas · Caracoles</div>
+          <div class="mc-sub-h">2º a elegir</div>
+          <div class="mc-list">Entrecot a la parrilla · Parrillada de pescado y marisco · Chuletas de cordero · Dorada a la plancha · 1/2 Bogavante plancha · Lubina plancha · Verdura mixta a la plancha</div>
+          <div class="mc-note">No incluye bebida</div>
+        </div>
+
+        <div class="menu-card">
+          <div class="mc-price-badge">23,95<small>€</small></div>
+          <div class="mc-title">Menú Especial</div>
+          <div class="mc-sub">Mínimo 2 personas</div>
+          <div class="mc-sub-h">1º (a compartir, elige 4)</div>
+          <div class="mc-list">Pulpo a la gallega · Fritura de pescado y marisco · Ensalada templada de marisco · Jamón ibérico y pan con tomate</div>
+          <div class="mc-sub-h">2º a elegir</div>
+          <div class="mc-list">1/2 Bogavante plancha · Entrecot parrilla · Chuletón parrilla · Solomillo · Lenguado plancha</div>
+          <div class="mc-note">No incluye bebida</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PARA PICAR -->
+    <div class="cat-section" id="picar">
+      <div class="cat-header"><div class="cat-icon"><i class="fas fa-pepper-hot"></i></div><div><div class="cat-title">Para Picar</div><div class="cat-desc">Tapas y raciones — precio ½ ración / ración cuando aplica</div></div></div>
+
+      <div class="dish-featured">
+        <img src="https://images.pexels.com/photos/8718738/pexels-photo-8718738.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Pulpo a la gallega">
+        <div>
+          <div class="df-badge">⭑ El más pedido</div>
+          <div class="df-name">11. Pulpo a la Gallega</div>
+          <div class="df-desc">Pimentón, sal gorda y aceite de oliva — la tapa estrella de la casa</div>
+        </div>
+        <div class="df-price">9,75 <small>/ 14,60€</small></div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="mi"><div class="mi-left"><span class="mi-num">01.</span><div><div class="mi-name">Pan con all i oli y aceitunas</div><span class="mi-desc">por ración</span></div></div><div class="mi-price">1,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">02.</span><div class="mi-name">Albóndigas de ternera</div></div><div class="mi-price">6,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">03.</span><div class="mi-name">Croquetas de marisco</div></div><div class="mi-price">4,80 <small>/ 6,80€</small></div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">03A.</span><div class="mi-name">Croquetas de jamón</div></div><div class="mi-price">4,80 <small>/ 6,80€</small></div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">04.</span><div class="mi-name">Gambas al ajillo</div></div><div class="mi-price">7,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">05.</span><div class="mi-name">Calamar andaluza</div></div><div class="mi-price">8,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">06.</span><div class="mi-name">Chipirones</div></div><div class="mi-price">7,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">07.</span><div class="mi-name">Pimientos de Padrón</div></div><div class="mi-price">4,80 <small>/ 6,80€</small></div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">08.</span><div class="mi-name">Caracoles</div></div><div class="mi-price">7,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">09.</span><div class="mi-name">Fritura de pescado y marisco</div></div><div class="mi-price">8,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">10.</span><div class="mi-name">Berberechos plancha</div></div><div class="mi-price">8,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">12.</span><div><div class="mi-name">Huevos rotos</div><span class="mi-desc">jamón, chistorra o morcilla</span></div></div><div class="mi-price">8,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">13.</span><div class="mi-name">Mejillones al vino</div></div><div class="mi-price">7,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">13A.</span><div class="mi-name">Mejillones marinera</div></div><div class="mi-price">7,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">14.</span><div class="mi-name">Gambas con gabardina</div></div><div class="mi-price">11,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">15.</span><div class="mi-name">Jamón Ibérico y pan con tomate</div></div><div class="mi-price">12,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">16.</span><div class="mi-name">Patatas fritas</div></div><div class="mi-price">3,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">16A.</span><div class="mi-name">Patatas bravas</div></div><div class="mi-price">3,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">17.</span><div><div class="mi-name">Pa amb oli</div><span class="mi-desc">jamón serrano, queso, salchichón</span></div></div><div class="mi-price">8,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">18.</span><div class="mi-name">Gambas con bacon</div></div><div class="mi-price">8,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">19.</span><div class="mi-name">Verduras en tempura</div></div><div class="mi-price">6,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">20.</span><div class="mi-name">Boquerones fritos</div></div><div class="mi-price">7,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">21.</span><div class="mi-name">Salmorejo</div></div><div class="mi-price">5,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">22.</span><div class="mi-name">Huevos fritos con patatas</div></div><div class="mi-price">6,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">23.</span><div class="mi-name">Alitas de pollo fritas</div></div><div class="mi-price">5,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">62.</span><div><div class="mi-name">Gyozas Japonesas</div><span class="mi-desc">8 unidades</span></div></div><div class="mi-price">7,95€</div></div>
+      </div>
+    </div>
+
+    <!-- ENSALADAS Y COMBINADOS -->
+    <div class="cat-section" id="ensaladas">
+      <div class="cat-header"><div class="cat-icon"><i class="fas fa-leaf"></i></div><div><div class="cat-title">Ensaladas y Plato Combinado</div><div class="cat-desc">Plato combinado con suplemento +1€</div></div></div>
+      <div class="menu-grid">
+        <div class="mi"><div class="mi-left"><span class="mi-num">24.</span><div class="mi-name">Ensalada mixta con jamón york</div></div><div class="mi-price">5,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">25.</span><div class="mi-name">Ensalada de pollo</div></div><div class="mi-price">6,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">26.</span><div class="mi-name">Ensalada de aguacate y gambas con vinagreta</div></div><div class="mi-price">7,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">27.</span><div class="mi-name">Ensalada templada de marisco</div></div><div class="mi-price">8,25€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">28.</span><div class="mi-name">Hamburguesa casera con o sin queso</div></div><div class="mi-price">6,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">29.</span><div class="mi-name">Escalope de pollo con patatas fritas</div></div><div class="mi-price">7,25€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">30.</span><div class="mi-name">Escalope de ternera con patatas</div></div><div class="mi-price">7,95€</div></div>
+      </div>
+    </div>
+
+    <!-- ARROCES Y PASTAS -->
+    <div class="cat-section" id="arroces">
+      <div class="cat-header"><div class="cat-icon"><i class="fas fa-bowl-rice"></i></div><div><div class="cat-title">Arroces y Pastas</div></div></div>
+
+      <div class="dish-featured">
+        <img src="https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Espaguetis boloñesa">
+        <div>
+          <div class="df-badge">⭑ Para compartir</div>
+          <div class="df-name">34. Espaguetis Boloñesa</div>
+          <div class="df-desc">Salsa de carne casera</div>
+        </div>
+        <div class="df-price">6,95€</div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="mi"><div class="mi-left"><span class="mi-num">31.</span><div class="mi-name">Canelones</div></div><div class="mi-price">6,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">32.</span><div class="mi-name">Pollo al curry con arroz</div></div><div class="mi-price">7,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">33.</span><div class="mi-name">Arroz meloso</div></div><div class="mi-price">7,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">34A.</span><div class="mi-name">Espaguettis con gambas</div></div><div class="mi-price">7,95€</div></div>
+      </div>
+    </div>
+
+    <!-- PESCADOS Y MARISCOS -->
+    <div class="cat-section" id="pescados">
+      <div class="cat-header"><div class="cat-icon"><i class="fas fa-fish"></i></div><div><div class="cat-title">Pescados y Mariscos</div><div class="cat-desc">Guarnición con gluten</div></div></div>
+
+      <div class="dish-featured">
+        <img src="https://images.pexels.com/photos/725992/pexels-photo-725992.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Lenguado a la plancha">
+        <div>
+          <div class="df-badge">⭑ Especialidad</div>
+          <div class="df-name">41. Lenguada a la Plancha</div>
+          <div class="df-desc">Limpia de espinas, con un toque de limón</div>
+        </div>
+        <div class="df-price">14,95€</div>
+      </div>
+
+      <div class="dish-featured">
+        <img src="https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Calamar a la plancha">
+        <div>
+          <div class="df-badge">⭑ Muy pedido</div>
+          <div class="df-name">44. Calamar Plancha</div>
+          <div class="df-desc">Tierno, con ajo y perejil</div>
+        </div>
+        <div class="df-price">13,50€</div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="mi"><div class="mi-left"><span class="mi-num">35.</span><div class="mi-name">Dorada a la plancha o a la espalda</div></div><div class="mi-price">9,30€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">36.</span><div class="mi-name">Lubina plancha o a la espalda</div></div><div class="mi-price">9,30€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">37.</span><div class="mi-name">Merluza a la plancha</div></div><div class="mi-price">11,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">38.</span><div class="mi-name">Bacalao al horno con patatas</div></div><div class="mi-price">12,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">39.</span><div class="mi-name">Brocheta mixta</div></div><div class="mi-price">8,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">40.</span><div class="mi-name">Bogavante 1/2 a la plancha</div></div><div class="mi-price">14,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">42.</span><div class="mi-name">Verdura mixta a la plancha</div></div><div class="mi-price">7,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">45.</span><div class="mi-name">Gambón plancha</div></div><div class="mi-price">11,50€</div></div>
+      </div>
+
+      <div class="dish-featured" style="margin-top:1.2rem">
+        <img src="https://images.pexels.com/photos/3296280/pexels-photo-3296280.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Parrillada de pescado y marisco">
+        <div>
+          <div class="df-badge">⭑ Para compartir · mínimo 2 pers.</div>
+          <div class="df-name">43. Parrillada de Pescado y Marisco con Bogavante</div>
+          <div class="df-desc">La gran fuente de la casa, ideal para compartir</div>
+        </div>
+        <div class="df-price">69,00€</div>
+      </div>
+    </div>
+
+    <!-- CARNES A LA BRASA -->
+    <div class="cat-section" id="carnes">
+      <div class="cat-header"><div class="cat-icon"><i class="fas fa-drumstick-bite"></i></div><div><div class="cat-title">Carnes a la Brasa</div><div class="cat-desc">Salsa pimienta o roquefort +1,80€ · Solo guarnición con gluten</div></div></div>
+
+      <div class="dish-featured">
+        <img src="https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Secreto Ibérico a la parrilla">
+        <div>
+          <div class="df-badge">⭑ El más pedido</div>
+          <div class="df-name">58. Secreto Ibérico a la Parrilla</div>
+          <div class="df-desc">Jugoso, con guarnición</div>
+        </div>
+        <div class="df-price">11,95€</div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="mi"><div class="mi-left"><span class="mi-num">46.</span><div class="mi-name">Costilleja</div></div><div class="mi-price">8,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">47.</span><div class="mi-name">Chuletas de cordero</div></div><div class="mi-price">11,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">48.</span><div class="mi-name">Codornices</div></div><div class="mi-price">7,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">49.</span><div class="mi-name">Gazapo</div></div><div class="mi-price">12,50€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">50.</span><div class="mi-name">Solomillo</div></div><div class="mi-price">14,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">51.</span><div class="mi-name">Chuletón</div></div><div class="mi-price">14,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">52.</span><div class="mi-name">Entrecotte</div></div><div class="mi-price">12,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">53.</span><div class="mi-name">Pechuga de pollo</div></div><div class="mi-price">7,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">54.</span><div class="mi-name">Paletilla de cordero al horno</div></div><div class="mi-price">12,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">59.</span><div class="mi-name">Huevos rotos con chipirones</div></div><div class="mi-price">8,80€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">60.</span><div><div class="mi-name">Alitas de pollo a la parrilla</div><span class="mi-desc">8 unidades</span></div></div><div class="mi-price">7,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">61.</span><div><div class="mi-name">Ostras</div><span class="mi-desc">unidad</span></div></div><div class="mi-price">SP/M</div></div>
+      </div>
+    </div>
+
+    <!-- CARNES A LA PIEDRA -->
+    <div class="cat-section" id="piedra">
+      <div class="cat-header"><div class="cat-icon"><i class="fas fa-fire"></i></div><div><div class="cat-title">Carnes a la Piedra</div><div class="cat-desc">Solo guarnición con gluten · te la cocinas tú mismo en tu mesa</div></div></div>
+      <div class="menu-grid">
+        <div class="mi"><div class="mi-left"><span class="mi-num">55.</span><div class="mi-name">Solomillo</div></div><div class="mi-price">22,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">56.</span><div class="mi-name">Chuletón</div></div><div class="mi-price">22,95€</div></div>
+        <div class="mi"><div class="mi-left"><span class="mi-num">57.</span><div class="mi-name">Entrecotte</div></div><div class="mi-price">19,95€</div></div>
+      </div>
+    </div>
+
+    <p class="nota">Precios con IVA incluido · "SP/M" = Según precio de mercado · Camí de la Vileta 41, Palma · Pregunta a nuestro equipo por el plato del día</p>
+  </main>
+</div>
+
+<button class="fab-top" id="fabTop"><i class="fas fa-arrow-up"></i></button>
+<div class="sticky-cta">
+  <a href="tel:+34971937813"><i class="fas fa-phone"></i> Llamar</a>
+  <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+</div>
+
+<script>
+function toggleMob(){document.getElementById('mobMenu').classList.toggle('open')}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open')}
+var fabTop=document.getElementById('fabTop');
+window.addEventListener('scroll',function(){fabTop.classList.toggle('show',window.scrollY>300)});
+fabTop.onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
+var sections=document.querySelectorAll('.cat-section');
+var links=document.querySelectorAll('.sidebar-nav a');
+window.addEventListener('scroll',function(){
+  var pos=window.scrollY+150;
+  sections.forEach(function(s){
+    if(s.offsetTop<=pos&&s.offsetTop+s.offsetHeight>pos){
+      links.forEach(function(a){a.classList.remove('active')});
+      var al=document.querySelector('.sidebar-nav a[href="#'+s.id+'"]');
+      if(al)al.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
